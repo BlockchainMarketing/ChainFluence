@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.6;
+pragma solidity >=0.6.6;
 
 import "@chainlink/contracts/src/v0.6/ChainlinkClient.sol";
 import "@chainlink/contracts/src/v0.6/vendor/Ownable.sol";
@@ -18,12 +18,7 @@ contract APIConsumer is ChainlinkClient, Ownable {
    * Job ID: ca98366cc7314957b8c012c72f05aeeb
    * Fee: 0.1 LINK
    */
-  constructor(
-    address _oracle,
-    string memory _jobId,
-    uint256 _fee,
-    address _link
-  ) public {
+  constructor(address _oracle, string memory _jobId, uint256 _fee, address _link) public {
     if (_link == address(0)) {
       setPublicChainlinkToken();
     } else {
@@ -41,11 +36,7 @@ contract APIConsumer is ChainlinkClient, Ownable {
    * Create a Chainlink request to retrieve API response, find the target
    * data, then multiply by timesAmount (to remove decimal places from data).
    */
-  function requestData(
-    string memory url,
-    string memory path,
-    int256 timesAmount
-  ) public returns (bytes32 requestId) {
+  function requestData(string memory url, string memory path, int256 timesAmount) public returns (bytes32 requestId) {
     Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.fulfill.selector);
 
     // Set the URL to perform the GET request on
