@@ -1,3 +1,21 @@
+# Usage details
+
+```bash
+cd packages/api
+```
+
+Start up the local development api :
+
+```bash
+yarn dev
+```
+
+Test the local development api:
+
+```bash
+yarn test
+```
+
 # ʕ •́؈•̀) `worker-typescript-template`
 
 ## ⚠️ Warning: This template is no longer maintained
@@ -8,7 +26,7 @@ Create TypeScript workers in the [command-line with Wrangler 2.0.0+](https://dev
 
 A batteries included, with the latest Wrangler, template for kick starting a TypeScript Cloudflare worker project.
 
-## Note: You must use [wrangler](https://developers.cloudflare.com/workers/cli-wrangler/install-update) 1.17 or newer to use this template.
+## Note: You must use [wrangler](https://developers.cloudflare.com/workers/cli-wrangler/install-update) 1.17 or newer to use this template
 
 ## 🔋 Getting Started
 
