@@ -6,6 +6,7 @@ import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import "../../vendor/openzeppelin/contracts/access/Ownable.sol";
 import "../../vendor/openzeppelin/contracts/proxy/Clones.sol";
 import "../../vendor/openzeppelin/contracts/security/Pausable.sol";
+
 import "../../vendor/openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 import "../../vendor/openzeppelin/contracts/utils/structs/EnumerableMap.sol";
@@ -13,13 +14,8 @@ import "../../vendor/openzeppelin/contracts/utils/Counters.sol";
 
 /* 
 TODO:
-- Campain Struct:
-    - budget 
-    - retweet threshold
-    - number of influencers
 
-- function to create a new campaign
-- function to validate campagn claim (Called by influencer with tweetUrl) If retweet > threshold -> transfer slice of budget (slice computed budget/number of influencers)
+- function to validate campaign claim (Called by influencer with tweetUrl) If retweet > threshold -> transfer slice of budget (slice computed budget/number of influencers)
 
 ValidateCampaignClaim:
 - requestValidateCampaign -> chainlink (maybe replace by chainlink function?)
@@ -47,11 +43,11 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
     uint256 campaignId;
     address company;
     uint256 budget;
-    uint256 retweetThreshold;
-    uint256 allowedInfluencersAmount;
+    uint256 validationThreshold;
+    uint256 partakersLimit;
+    bool isClosed;
   }
 
-  // TODO: Enumerable map ?
   Campaign[] campaigns;
   mapping(uint256 => Campaign) campaignById;
 
@@ -72,6 +68,9 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    */
   event SignedUp(uint256 indexed userId, address userAddress);
 
+  event CampaignCreated(uint256 campaignId, address company);
+  event CampaignClosed(uint256 campaignId);
+
   ///
   /// CONSTRUCTOR
   ///
@@ -80,7 +79,13 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice Initialize the link token and target oracle
    * All testnets config : https://docs.chain.link/any-api/testnet-oracles/
    */
-  constructor(bytes32 _jobId, string memory _requestBaseURI, address _oracle, address _link, uint256 _treasuryFee) {
+  constructor(
+    bytes32 _jobId,
+    string memory _requestBaseURI,
+    address _oracle,
+    address _link,
+    uint256 _treasuryFee
+  ) {
     setChainlinkToken(_link);
     setChainlinkOracle(_oracle);
     jobId = _jobId;
@@ -95,15 +100,38 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
   /// MAIN FUNCTIONS
   ///
 
-  function createCampaign(uint256 budget, uint256 retweetThreshold, uint256 allowedInfluencersAmount) external {
+  /**
+   * @notice Function that allows a company to create a new campaign
+   * @param budget - Budget each winning partaker will share with each other
+   * @param validationThreshold - Minimum amount of retweet, likes etc for a partaker to win
+   * @param partakersLimit - Maximum amount of winning partakers for this campaign
+   */
+  function createCampaign(
+    uint256 budget,
+    uint256 validationThreshold,
+    uint256 partakersLimit
+  ) external {
     lastCampaignId++;
     uint256 newCampaignId = lastCampaignId;
     Campaign storage newCampaign = campaignById[newCampaignId];
     newCampaign.budget = budget;
-    newCampaign.retweetThreshold = retweetThreshold;
-    newCampaign.allowedInfluencersAmount = allowedInfluencersAmount;
+    newCampaign.validationThreshold = validationThreshold;
+    newCampaign.partakersLimit = partakersLimit;
     newCampaign.company = msg.sender;
+    newCampaign.isClosed = false;
     campaigns.push(newCampaign);
+    emit CampaignCreated(newCampaignId, msg.sender);
+  }
+
+  /**
+   * @notice Function that allows a company to close a
+   * @param campaignId - The id of the campaign
+   */
+  function closeCampaign(uint256 campaignId) external {
+    Campaign storage campaign = _getCampaign(campaignId);
+    require(msg.sender == campaign.company, "Caller is not the campaign owner");
+    campaign.isClosed = true;
+    emit CampaignClosed(campaignId);
   }
 
   /**
@@ -186,6 +214,10 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
       );
   }
 
+  function getCampaign(uint256 campaignId) external view returns (Campaign memory) {
+    return _getCampaign(campaignId);
+  }
+
   /**
    * @notice Return URI for sign up endpoint
    */
@@ -243,6 +275,14 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
   ///
   /// INTERNAL FUNCTIONS
   ///
+
+  /**
+   * @notice retrieves a campaign by its id
+   * @param _campaignId the id of the campaign
+   */
+  function _getCampaign(uint256 _campaignId) internal view returns (Campaign storage) {
+    return campaignById[_campaignId];
+  }
 
   /**
    * @notice validates the input to performUpkeep
