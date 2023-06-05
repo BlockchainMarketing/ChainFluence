@@ -10,7 +10,7 @@ kv_namespaces = [
 name = "giveaways-dev"
 [vars]
 KV_CACHE = false
-WORKER_BASE_URL="http://127.0.0.1:8787"
+WORKER_BASE_URL="https://giveaways-dev.lfgames.workers.dev/"
 TWITTER_APP_ID=26238171
 
 
