@@ -167,7 +167,7 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
     require(campaignContributors.contributorsClaimStatus[msg.sender] == false, "Retribution already claimed");
     uint256 retributionAmount = _computeRetributionAmount(campaignId);
     _updateContributorClaimStatus(campaignId);
-    payable(msg.sender).transfer(amount);
+    payable(msg.sender).transfer(retributionAmount);
     emit ContributorRetributed(campaignId, msg.sender, retributionAmount);
   }
 
