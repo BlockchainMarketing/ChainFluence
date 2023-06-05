@@ -88,13 +88,7 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice Initialize the link token and target oracle
    * All testnets config : https://docs.chain.link/any-api/testnet-oracles/
    */
-  constructor(
-    bytes32 _jobId,
-    string memory _requestBaseURI,
-    address _oracle,
-    address _link,
-    uint256 _treasuryFee
-  ) {
+  constructor(bytes32 _jobId, string memory _requestBaseURI, address _oracle, address _link, uint256 _treasuryFee) {
     setChainlinkToken(_link);
     setChainlinkOracle(_oracle);
     jobId = _jobId;
@@ -115,11 +109,7 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @param validationThreshold - Minimum amount of retweet, likes etc for a partaker to win
    * @param partakersLimit - Maximum amount of winning partakers for this campaign
    */
-  function createCampaign(
-    uint256 budget,
-    uint256 validationThreshold,
-    uint256 partakersLimit
-  ) external {
+  function createCampaign(uint256 budget, uint256 validationThreshold, uint256 partakersLimit) external {
     lastCampaignId++;
     uint256 newCampaignId = lastCampaignId;
     Campaign storage newCampaign = campaignById[newCampaignId];
@@ -147,11 +137,7 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice Function that allows a user to validate his  to close a
    * @param campaignId - The id of the campaign
    */
-  function claimCampaignContribution(
-    uint256 campaignId,
-    string postId,
-    uint256 claimedCounter
-  ) external {
+  function claimCampaignContribution(uint256 campaignId, string memory postId, uint256 claimedCounter) external {
     bool isClaimValid = _validateContributionClaim(campaignId, postId, claimedCounter);
     require(isClaimValid == true, "This contribution does not satisfy the campaign's requirements");
     _addPartakerToCampaignContributors(campaignId, msg.sender);
@@ -323,11 +309,11 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
 
   /**
    * @notice validates the input to performUpkeep
-   * @param _twitterId the id of the cron job
+   * @param campaignId the id of the cron job
    */
   function _validateContributionClaim(
     uint256 campaignId,
-    string postId,
+    string memory postId,
     uint256 claimedCounter
   ) private view returns (bool) {
     // TODO Implement twitter verification using oracles. Currently we believe what user inputs
