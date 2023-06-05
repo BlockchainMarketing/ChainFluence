@@ -143,11 +143,16 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
     emit CampaignClosed(campaignId);
   }
 
-  function claimCampaignContribution(uint256 campaignId) external {
-    // TODO:
-    // Use the internal _validateContributionClaim function to verify the msg.sender has indeed reached the validationThreshold etc
-    // For now this internal function _validateContributionClaim always return true
-    bool isClaimValid = _validateContributionClaim();
+  /**
+   * @notice Function that allows a user to validate his  to close a
+   * @param campaignId - The id of the campaign
+   */
+  function claimCampaignContribution(
+    uint256 campaignId,
+    string postId,
+    uint256 claimedCounter
+  ) external {
+    bool isClaimValid = _validateContributionClaim(campaignId, postId, claimedCounter);
     require(isClaimValid == true, "This contribution does not satisfy the campaign's requirements");
     _addPartakerToCampaignContributors(campaignId, msg.sender);
     emit ContributorAdded(campaignId, msg.sender);
@@ -161,8 +166,8 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
     );
     require(campaignContributors.contributorsClaimStatus[msg.sender] == false, "Retribution already claimed");
     uint256 retributionAmount = _computeRetributionAmount(campaignId);
-    // TODO: Make the eth transfer to msg.sender
     _updateContributorClaimStatus(campaignId);
+    payable(msg.sender).transfer(amount);
     emit ContributorRetributed(campaignId, msg.sender, retributionAmount);
   }
 
@@ -320,11 +325,14 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice validates the input to performUpkeep
    * @param _twitterId the id of the cron job
    */
-  function _validateContributionClaim(uint256 _twitterId) private view {
-    // TODO implement and use
-    // require(winners[_twitterId].length == 0, "Twitter winners already requesteds");
-    // require(!twitters[_twitterId].isEnded, "Twitter already ended");
-    return true;
+  function _validateContributionClaim(
+    uint256 campaignId,
+    string postId,
+    uint256 claimedCounter
+  ) private view returns (bool) {
+    // TODO Implement twitter verification using oracles. Currently we believe what user inputs
+    Campaign storage campaign = _getCampaign(campaignId);
+    return claimedCounter >= campaign.validationThreshold;
   }
 
   function _addPartakerToCampaignContributors(uint256 campaignId, address partaker) internal {
