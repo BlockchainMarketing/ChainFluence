@@ -52,6 +52,20 @@ router.get("/tweets/:tweetId/retweets", async ({ params }) => {
 	}
 });
 
+router.get("/tweets/:tweetId/retweetCounter", async ({ params }) => {
+	const isParamError = requireField("tweetId", params);
+	if (isParamError) return isParamError;
+
+	const { tweetId } = params;
+
+	try {
+		const result = await getAllRetweets(tweetId);
+		return json(result.length);
+	} catch (err) {
+		return error(500, { error: { message: err.message } });
+	}
+});
+
 router.get("/tweets/:tweetId", async ({ params }) => {
 	const isParamError = requireField("tweetId", params);
 	if (isParamError) return isParamError;

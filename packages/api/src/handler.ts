@@ -51,7 +51,7 @@ export const getRetweets = async (tweetId: string, pagination_token = "") => {
 export const getTweet = async (tweetId: string) => {
 	if (!tweetId) throw new Error("tweet id is needed");
 
-	const endpointURL = `${baseUri}/2/tweets/${tweetId}`;
+	const endpointURL = `${baseUri}/2/tweets/${tweetId}?tweet.fields=author_id`;
 
 	const res = await fetch(endpointURL, getRequestParams());
 	if (res.ok) return await res.json();
