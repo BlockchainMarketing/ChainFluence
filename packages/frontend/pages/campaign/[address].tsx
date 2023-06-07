@@ -5,6 +5,7 @@ import { RevealInfo, Mint, Gallery } from '../../components/collection'
 import { Error } from '../../components/Error'
 import { useCollectionContract } from '../../hooks/useCollectionContract'
 import { Loading } from '../../components/Loading'
+import { Box, Flex } from '@chakra-ui/react'
 
 function Collection(): JSX.Element {
   const router = useRouter()
@@ -27,17 +28,19 @@ function Collection(): JSX.Element {
   }
 
   return (
-    <>
-      <Section>
-        <Mint collection={contract}></Mint>
-      </Section>
-      <Section>
-        <RevealInfo collection={contract}></RevealInfo>
-      </Section>
-      <Section>
-        <Gallery collection={contract}></Gallery>
-      </Section>
-    </>
+    <Flex direction="column" align="center" justify="center" minHeight="100vh">
+      <Box width="full" maxWidth="container.md" px={8}>
+        <Section>
+          <Mint collection={contract}></Mint>
+        </Section>
+        <Section>
+          <RevealInfo collection={contract}></RevealInfo>
+        </Section>
+        <Section>
+          <Gallery collection={contract}></Gallery>
+        </Section>
+      </Box>
+    </Flex>
   )
 }
 

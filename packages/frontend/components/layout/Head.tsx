@@ -27,8 +27,9 @@ export const Head = ({
 }): JSX.Element => {
   const router = useRouter()
   const meta: MetaProps = {
-    title: 'Chainlink Demo App',
-    description: 'Full stack starter project showcasing Chainlink products on Ethereum',
+    title: 'ChaInfluence',
+    description:
+      'A platform that fosters a mutually beneficial relationship between brands and influencers.',
     image: `${WEBSITE_HOST_URL}/images/social-preview.png`,
     type: 'website',
     ...customMeta,

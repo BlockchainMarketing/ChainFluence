@@ -12,7 +12,7 @@ function HomeIndex(): JSX.Element {
   return (
     <>
       {/* <Heading as="h1" mb="4">
-        Welcome to the Chainlink Demo App
+        Welcome to the ChaInfluence
       </Heading>
       <Text fontSize="xl">
         Full stack starter project showcasing Chainlink products on Ethereum
@@ -77,7 +77,6 @@ function HomeIndex(): JSX.Element {
       <FeaturedContests />
       <CallToAction />
       <HowItWorks />
-
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useEthers } from '@usedapp/core'
-import { Text, Heading } from '@chakra-ui/react'
+import { Text, Heading, Flex, Box } from '@chakra-ui/react'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { Section } from '../components/layout'
 
@@ -60,28 +60,30 @@ function CreatePage(): JSX.Element {
   )
 
   return (
-    <>
-      <Heading as="h1" mb="8">
-        Create Campaign
-      </Heading>
-      <Text fontSize="xl">
-        Setup a campaign with the best influence&lsquo;s.
-      </Text>
-      <Section>
-        {deployedContract && (
-          <SuccessDialog
-            contractAddress={deployedContract.address}
-            deployTxHash={deployedContract.txHash}
-            campaignName={deployedContract.name}
-          />
-        )}
-        {!deployedContract && (
-          <CreateForm onSubmit={onSubmit} isLoading={isLoading} />
-        )}
-        {/* @ts-expect-error */}
-        {error && <Error message={error} mt="2" />}
-      </Section>
-    </>
+    <Flex direction="column" align="center" justify="center" minHeight="100vh">
+      <Box width="full" maxWidth="container.md" px={8}>
+        <Heading as="h1" mb="8">
+          Create Campaign
+        </Heading>
+        <Text fontSize="xl">
+          Setup a campaign with the best influence&lsquo;s.
+        </Text>
+        <Section>
+          {deployedContract && (
+            <SuccessDialog
+              contractAddress={deployedContract.address}
+              deployTxHash={deployedContract.txHash}
+              campaignName={deployedContract.name}
+            />
+          )}
+          {!deployedContract && (
+            <CreateForm onSubmit={onSubmit} isLoading={isLoading} />
+          )}
+          {/* @ts-expect-error */}
+          {error && <Error message={error} mt="2" />}
+        </Section>
+      </Box>
+    </Flex>
   )
 }
 

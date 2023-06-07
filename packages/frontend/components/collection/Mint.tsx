@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Heading,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -51,13 +52,7 @@ export const Mint = ({ collection }: MintProps): JSX.Element => {
         {name || ''}
         {symbol ? `(${symbol})` : '...'}
       </Heading>
-      <Box
-        // @ts-expect-error
-        d="flex"
-        marginTop={{
-          base: '5',
-        }}
-      >
+      <Flex mt={5}>
         <NumberInput
           defaultValue={1}
           min={1}
@@ -98,7 +93,7 @@ export const Mint = ({ collection }: MintProps): JSX.Element => {
         >
           Mint
         </Button>
-      </Box>
+      </Flex>
       <Text mt="4">
         {totalSupply ? totalSupply.toString() : 0}/
         {maxSupply ? maxSupply.toString() : 0} minted{' '}
