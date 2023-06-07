@@ -1,7 +1,7 @@
 import { useEthers } from '@usedapp/core'
 import { useRouter } from 'next/router'
 import { Section } from '../../components/layout'
-import { RevealInfo, Mint, Gallery } from '../../components/collection'
+import { Details, Hero, Gallery, Register } from '../../components/campaign'
 import { Error } from '../../components/Error'
 import { useCollectionContract } from '../../hooks/collection/useCollectionContract'
 import { Loading } from '../../components/Loading'
@@ -31,11 +31,15 @@ function Campaign(): JSX.Element {
     <Flex direction="column" align="center" justify="center" minHeight="100vh">
       <Box width="full" maxWidth="container.md" px={8}>
         <Section>
-          <Mint collection={contract}></Mint>
+          <Hero collection={contract}></Hero>
         </Section>
         <Section>
-          <RevealInfo collection={contract}></RevealInfo>
+          <Details collection={contract}></Details>
         </Section>
+        <Section>
+          <Register collection={contract}></Register>
+        </Section>
+
         <Section>
           <Gallery collection={contract}></Gallery>
         </Section>

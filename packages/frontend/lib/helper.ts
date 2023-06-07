@@ -1,3 +1,6 @@
+import moment from 'moment'
+import { BigNumber } from 'ethers'
+
 /**
  * Constants & Helpers
  */
@@ -36,3 +39,9 @@ export const isFractionalNumber = (value: string) => {
   }
   return error
 }
+
+/**
+ * Constants & Helpers
+ */
+export const formatTime = (timestamp: BigNumber) =>
+  moment.unix(timestamp.toNumber()).fromNow()
