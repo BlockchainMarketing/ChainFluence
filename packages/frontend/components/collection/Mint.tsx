@@ -52,6 +52,7 @@ export const Mint = ({ collection }: MintProps): JSX.Element => {
         {symbol ? `(${symbol})` : '...'}
       </Heading>
       <Box
+        // @ts-expect-error
         d="flex"
         marginTop={{
           base: '5',
