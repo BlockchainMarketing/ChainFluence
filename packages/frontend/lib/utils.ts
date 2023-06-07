@@ -1,5 +1,6 @@
 import { Currency, FiatCurrency, TransactionState } from '@usedapp/core'
 import { BigNumber } from 'ethers'
+import { DEFAULT_SUPPORTED_CHAINS } from '@usedapp/core'
 
 // From https://github.com/NoahZinsmeister/web3-react/blob/v6/example/pages/index.tsx
 // Parses the possible errors provided by web3-react
@@ -45,3 +46,9 @@ export const formatUsd = (value: BigNumber): string =>
 export const getRequestStatus = (status: TransactionState): string =>
   (status === 'Mining' && 'Mining Request') ||
   (status === 'Success' && 'Fulfilling Request')
+
+  export function getNetworkName(chainId: number) {
+    return DEFAULT_SUPPORTED_CHAINS.find((network) => network.chainId === chainId)
+      ?.chainName
+  }
+  
