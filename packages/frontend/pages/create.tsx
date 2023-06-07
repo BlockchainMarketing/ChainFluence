@@ -64,7 +64,9 @@ function CreatePage(): JSX.Element {
       <Heading as="h1" mb="8">
         Create Campaign
       </Heading>
-      <Text fontSize="xl">Setup a campaign with the best influence's.</Text>
+      <Text fontSize="xl">
+        Setup a campaign with the best influence&lsquo;s.
+      </Text>
       <Section>
         {deployedContract && (
           <SuccessDialog
