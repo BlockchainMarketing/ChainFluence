@@ -12,6 +12,9 @@ function OpenPage(): JSX.Element {
       <Text fontSize="xl">
         Navigate to the page of a previously deployed collection.
       </Text>
+      <Text fontSize="xs">
+       Example Campaign : 0xbBC67173c4Fa70af411FF5667d811980aaDDF6b6
+      </Text>
       <Section>
         <OpenForm />
       </Section>
