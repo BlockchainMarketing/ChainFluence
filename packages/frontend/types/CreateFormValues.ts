@@ -1,9 +1,6 @@
-type CreateFormValues = {
+export type CreateCollectionFormValues = {
   name: string
   symbol: string
-  budget: string
-  validationThreshold: string
-  partakersLimit: string
   maxSupply: string
   mintCost: string
   revealBatchSize: string
@@ -11,4 +8,9 @@ type CreateFormValues = {
   vrfSubscriptionId: string
 }
 
-export default CreateFormValues
+export type CreateCampaignFormValues = {
+  name: string
+  budget: string
+  validationThreshold: string
+  partakersLimit: string
+}
