@@ -14,13 +14,13 @@ import {
   Link,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, QuestionIcon } from '@chakra-ui/icons'
-import { CreateCollectionFormValues } from '../../types/CreateFormValues'
+import { CreateCollectionFormValues } from '../../../types/CreateFormValues'
 import {
   isEmpty,
   isFractionalNumber,
   isNumber,
   isPositiveNumber,
-} from '../../lib/helper'
+} from '../../../lib/helper'
 
 /**
  * Prop Types

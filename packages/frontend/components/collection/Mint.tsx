@@ -14,7 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Error } from '../Error'
-import { useCollectionCall } from '../../hooks/useCollectionCall'
+import { useCollectionCall } from '../../hooks/collection/useCollectionCall'
 
 /**
  * Prop Types

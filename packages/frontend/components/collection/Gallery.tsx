@@ -13,9 +13,9 @@ import {
   Link,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { useAllTokens } from '../../hooks/useAllTokens'
-import { useOwnedTokens } from '../../hooks/useOwnedTokens'
-import { useBatches } from '../../hooks/useBatches'
+import { useAllTokens } from '../../hooks/collection/useAllTokens'
+import { useOwnedTokens } from '../../hooks/collection/useOwnedTokens'
+import { useBatches } from '../../hooks/collection/useBatches'
 import { TokenGrid } from './TokenGrid'
 import { BatchList } from './BatchList'
 

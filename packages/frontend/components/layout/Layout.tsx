@@ -110,6 +110,12 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
                     Old
                   </MenuButton>
                   <MenuList>
+                    <NextLink
+                      href="/_old/collection/0xbBC67173c4Fa70af411FF5667d811980aaDDF6b6"
+                      passHref
+                    >
+                      <MenuItem>Collection</MenuItem>
+                    </NextLink>
                     <NextLink href="/_old/feeds" passHref>
                       <MenuItem>Data Feeds</MenuItem>
                     </NextLink>

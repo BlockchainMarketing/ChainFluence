@@ -3,9 +3,9 @@ import { useEthers } from '@usedapp/core'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { Contract, ethers } from 'ethers'
 import { isAddress } from 'ethers/lib/utils'
-import { getNetworkName } from '../lib/utils'
+import { getNetworkName } from '../../lib/utils'
 
-import NFTCollection from '../artifacts/contracts/NFTCollection.sol/NFTCollection.json'
+import NFTCollection from '../../artifacts/contracts/NFTCollection.sol/NFTCollection.json'
 const { abi } = NFTCollection
 
 export function useCollectionContract<T extends Contract = Contract>(

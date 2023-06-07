@@ -1,13 +1,13 @@
 import { useEthers } from '@usedapp/core'
 import { useRouter } from 'next/router'
-import { Section } from '../../components/layout'
-import { RevealInfo, Mint, Gallery } from '../../components/collection'
-import { Error } from '../../components/Error'
-import { useCollectionContract } from '../../hooks/collection/useCollectionContract'
-import { Loading } from '../../components/Loading'
+import { Section } from '../../../components/layout'
+import { RevealInfo, Mint, Gallery } from '../../../components/collection'
+import { Error } from '../../../components/Error'
+import { useCollectionContract } from '../../../hooks/collection/useCollectionContract'
+import { Loading } from '../../../components/Loading'
 import { Box, Flex } from '@chakra-ui/react'
 
-function Campaign(): JSX.Element {
+function Collection(): JSX.Element {
   const router = useRouter()
   const address = router.query.address as string
 
@@ -44,4 +44,4 @@ function Campaign(): JSX.Element {
   )
 }
 
-export default Campaign
+export default Collection
