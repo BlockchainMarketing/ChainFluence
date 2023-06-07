@@ -192,7 +192,7 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
       </main>
       <footer>
         <Container mt="8" py="8" maxWidth="container.xl">
-          <Link href="https://github.com/hackbg/chainlink-fullstack" isExternal>
+          <Link href="https://github.com/paradoux/blockchain-marketing-marketplace" isExternal>
             <HStack>
               <Image src="images/github.svg" width="20px" />
               <Text>GitHub</Text>
