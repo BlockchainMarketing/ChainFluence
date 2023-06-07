@@ -1,6 +1,6 @@
 import { Heading, Text, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Section } from '../components/layout'
+import { Section } from '../../components/layout'
 
 function HomeIndex(): JSX.Element {
   return (

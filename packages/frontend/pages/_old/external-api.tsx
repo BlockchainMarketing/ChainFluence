@@ -1,11 +1,10 @@
 import React from 'react'
 import { Heading, Text, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { RequestBuilder } from '../components/api'
-import { Section } from '../components/layout'
+import { RequestBuilder } from '../../components/api'
+import { Section } from '../../components/layout'
 
 function ExternalAPI(): JSX.Element {
-
   return (
     <>
       <Heading as="h1" mb="8">

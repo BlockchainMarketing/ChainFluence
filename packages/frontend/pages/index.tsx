@@ -1,12 +1,17 @@
-import NextLink from 'next/link'
-import { Heading, Text, Link } from '@chakra-ui/react'
-import { ArrowForwardIcon } from '@chakra-ui/icons'
-import { Section } from '../components/layout'
+// import NextLink from 'next/link'
+// import { Heading, Text, Link } from '@chakra-ui/react'
+// import { ArrowForwardIcon } from '@chakra-ui/icons'
+// import { Section } from '../components/layout'
+import Hero from '../components/landing/Hero'
+import Benefits from '../components/landing/Benefits'
+import FeaturedContests from '../components/landing/FeaturedContests'
+import CallToAction from '../components/landing/CallToAction'
+import HowItWorks from '../components/landing/HowItWorks'
 
 function HomeIndex(): JSX.Element {
   return (
     <>
-      <Heading as="h1" mb="4">
+      {/* <Heading as="h1" mb="4">
         Welcome to the Chainlink Demo App
       </Heading>
       <Text fontSize="xl">
@@ -66,7 +71,13 @@ function HomeIndex(): JSX.Element {
             Go to Demo <ArrowForwardIcon />
           </Link>
         </NextLink>
-      </Section>
+      </Section> */}
+      <Hero />
+      <Benefits />
+      <FeaturedContests />
+      <CallToAction />
+      <HowItWorks />
+
     </>
   )
 }

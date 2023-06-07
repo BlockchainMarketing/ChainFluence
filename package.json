@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "yarn workspace chainlink-fullstack-frontend dev",
-    "build": "yarn workspace chainlink-fullstack-frontend build",
     "export": "yarn workspace chainlink-fullstack-frontend export",
     "start": "yarn workspace chainlink-fullstack-frontend start",
     "chain": "yarn workspace chainlink-fullstack-hardhat chain",
@@ -15,7 +14,10 @@
     "coverage:contracts": "yarn workspace chainlink-fullstack-hardhat coverage",
     "lint:frontend": "yarn workspace chainlink-fullstack-frontend lint",
     "format:frontend": "yarn workspace chainlink-fullstack-frontend format",
-    "format:hardhat": "yarn workspace chainlink-fullstack-hardhat format"
+    "format:hardhat": "yarn workspace chainlink-fullstack-hardhat format",
+    "build": "(yarn run 'compile' &) && yarn build:dapp && yarn build:api",
+    "build:dapp": "yarn workspace chainlink-fullstack-frontend build",
+    "build:api": "yarn workspace chainlink-fullstack-api build"
   },
   "workspaces": {
     "packages": [
