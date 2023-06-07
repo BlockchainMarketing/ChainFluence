@@ -2,7 +2,7 @@
 	"name": "chainlink-fullstack-api",
 	"description": "Cloudflare worker giveaway API",
 	"license": "MIT",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"author": "@GuiDieudo",
 	"scripts": {
 		"dev": "npx wrangler dev",
