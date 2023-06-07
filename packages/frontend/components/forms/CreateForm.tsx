@@ -76,6 +76,9 @@ export const CreateForm = ({
     initialValues: {
       name: '',
       symbol: '',
+      budget: '',
+      validationThreshold: '',
+      partakersLimit: '',
       maxSupply: '',
       mintCost: '',
       revealBatchSize: '',
@@ -102,7 +105,7 @@ export const CreateForm = ({
                 bg="white"
                 name="name"
                 validate={isEmpty}
-                placeholder="My Sample Collection"
+                placeholder="My Sample Campaign"
               />
             </div>
           </Tooltip>
@@ -110,6 +113,95 @@ export const CreateForm = ({
             <FormErrorMessage>Name {formik.errors.name}</FormErrorMessage>
           )}
         </FormControl>
+        <FormControl
+          mt="4"
+          isInvalid={formik.touched.budget && !!formik.errors.budget}
+        >
+          <FormLabel htmlFor="maxSupply">Budget</FormLabel>
+          <Tooltip
+            label="The total budget allocated to your campaign (in ETH)."
+            placement="right-start"
+            fontSize="xs"
+            hasArrow
+          >
+            <div>
+              <Field
+                as={Input}
+                bg="white"
+                name="budget"
+                validate={isPositiveNumber}
+                placeholder="10"
+              />
+            </div>
+          </Tooltip>
+          {formik.errors.maxSupply && formik.touched.maxSupply && (
+            <FormErrorMessage>Budget {formik.errors.budget}</FormErrorMessage>
+          )}
+        </FormControl>
+        <FormControl
+          mt="4"
+          isInvalid={
+            formik.touched.validationThreshold &&
+            !!formik.errors.validationThreshold
+          }
+        >
+          <FormLabel htmlFor="validationThreshold">
+            Validation Threshold
+          </FormLabel>
+          <Tooltip
+            label="Minimum amount of retweets for a participant to win"
+            placement="right-start"
+            fontSize="xs"
+            hasArrow
+          >
+            <div>
+              <Field
+                as={Input}
+                bg="white"
+                name="validationThreshold"
+                validate={isPositiveNumber}
+                placeholder="100"
+              />
+            </div>
+          </Tooltip>
+          {formik.errors.validationThreshold &&
+            formik.touched.validationThreshold && (
+              <FormErrorMessage>
+                Validation Threshold {formik.errors.validationThreshold}
+              </FormErrorMessage>
+            )}
+        </FormControl>
+
+        <FormControl
+          mt="4"
+          isInvalid={
+            formik.touched.partakersLimit && !!formik.errors.partakersLimit
+          }
+        >
+          <FormLabel htmlFor="partakersLimit">Number of winners</FormLabel>
+          <Tooltip
+            label="Maximum number of winners for this campaign"
+            placement="right-start"
+            fontSize="xs"
+            hasArrow
+          >
+            <div>
+              <Field
+                as={Input}
+                bg="white"
+                name="partakersLimit"
+                validate={isPositiveNumber}
+                placeholder="5"
+              />
+            </div>
+          </Tooltip>
+          {formik.errors.partakersLimit && formik.touched.partakersLimit && (
+            <FormErrorMessage>
+              Partakers Limit {formik.errors.partakersLimit}
+            </FormErrorMessage>
+          )}
+        </FormControl>
+        {/* TODO TO REMOVE */}
         <FormControl
           mt="4"
           isInvalid={formik.touched.symbol && !!formik.errors.symbol}
