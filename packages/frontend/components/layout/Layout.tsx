@@ -95,7 +95,17 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
                   Home
                 </Link>
               </NextLink>
-              <NextLink href="/feeds" passHref>
+              <NextLink href="/create" passHref>
+                <Link px="4" py="1">
+                  Form Create
+                </Link>
+              </NextLink>
+              <NextLink href="/open" passHref>
+                <Link px="4" py="1">
+                  Form Open
+                </Link>
+              </NextLink>
+              {/* <NextLink href="/feeds" passHref>
                 <Link px="4" py="1">
                   Data Feeds
                 </Link>
@@ -114,7 +124,7 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
                 <Link px="4" py="1">
                   Automation
                 </Link>
-              </NextLink>
+              </NextLink> */}
             </Flex>
             {account ? (
               <Flex
