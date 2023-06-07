@@ -5,14 +5,8 @@ import {
   Button,
   Container,
   Flex,
-  FormLabel,
   Heading,
   Input,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
   Text,
   Tooltip,
 } from '@chakra-ui/react'
@@ -32,19 +26,19 @@ interface RegisterProps {
 export const Register = ({ collection }: RegisterProps): JSX.Element => {
   const { account } = useEthers()
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [twitterHandle, setTwitterHandle] = useState(1)
   const [isRegisterDisabled, setIsRegisterDisabled] = useState(true)
 
-  const name = useCollectionCall<string>(collection, 'name')
-  const symbol = useCollectionCall<string>(collection, 'symbol')
   const totalSupply = useCollectionCall<BigNumber>(collection, 'totalSupply')
   const mintCost = useCollectionCall<BigNumber>(collection, 'mintCost')
   const maxSupply = useCollectionCall<BigNumber>(collection, 'maxSupply')
 
+  // TODO update this condition
   const hasReachedMaxSupply =
     totalSupply && maxSupply && totalSupply.gte(maxSupply)
 
-  const { send, state } = useContractFunction(collection, 'mint')
+  const { /*send,*/ state } = useContractFunction(collection, 'mint')
   const isLoading = state.status === 'Mining'
 
   return (
@@ -64,21 +58,16 @@ export const Register = ({ collection }: RegisterProps): JSX.Element => {
             placeholder="Twitter handle @"
             id="twitter-handle"
             bgColor="white"
-            // onChange={(e) => setTwitterHandle(e.target.value)}
-            // onChange={(valueAsString: string, valueAsNumber: number) => {
             onChange={(e: any) => {
-              // checks if new value is not a number
-              // in JS NaN == NaN equals false so isNaN() is necessary.
-              if (isNaN(parseInt(e.target.value)))) {
-                setIsRegisterDisabled(true)
-              } else {
+              try {
+                setTwitterHandle(e.target.value)
                 setIsRegisterDisabled(false)
+              } catch (error) {
+                setIsRegisterDisabled(true)
               }
-              setRegisterAmount(e.target.value))
             }}
           />
         </Tooltip>
-        {/* TODO put button on a new line and center */}
         <Button
           isLoading={isLoading}
           colorScheme="teal"
@@ -91,11 +80,12 @@ export const Register = ({ collection }: RegisterProps): JSX.Element => {
           }
           ml="4"
           px="8"
-          onClick={() => {
-            send(mintAmount, {
-              value: mintCost.mul(mintAmount),
-            })
-          }}
+          // TODO register user
+          // onClick={() => {
+          //   send(twitterHandle, {
+          //     value: mintCost.mul(mintAmount),
+          //   })
+          // }}
         >
           Register
         </Button>

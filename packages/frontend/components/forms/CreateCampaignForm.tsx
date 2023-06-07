@@ -74,7 +74,7 @@ export const CreateCampaignForm = ({
           mt="4"
           isInvalid={formik.touched.budget && !!formik.errors.budget}
         >
-          <FormLabel htmlFor="maxSupply">Budget</FormLabel>
+          <FormLabel htmlFor="budget">Budget</FormLabel>
           <Tooltip
             label="The total budget allocated to your campaign (in ETH)."
             placement="right-start"
@@ -102,9 +102,7 @@ export const CreateCampaignForm = ({
             !!formik.errors.validationThreshold
           }
         >
-          <FormLabel htmlFor="validationThreshold">
-            Validation Threshold
-          </FormLabel>
+          <FormLabel htmlFor="validationThreshold">Retweet Milestone</FormLabel>
           <Tooltip
             label="Minimum amount of retweets for a participant to win"
             placement="right-start"
