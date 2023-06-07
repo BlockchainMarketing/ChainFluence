@@ -179,7 +179,7 @@ export const CreateCampaignForm = ({
               Object.values(formik.errors).toString() != ''
             }
           >
-            Deploy
+            Deploy Campaign
           </Button>
         </Tooltip>
       </FormikProvider>
