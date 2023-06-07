@@ -60,7 +60,10 @@ router.get("/tweets/:tweetId/retweetCounter", async ({ params }) => {
 
 	try {
 		const result = await getAllRetweets(tweetId);
-		return json({ counter: Number(result.length) });
+		return json({ 
+			tweetId: BigNumber.from(tweetId),
+			counter: BigNumber.from(result.length) 
+		});
 	} catch (err) {
 		return error(500, { error: { message: err.message } });
 	}
