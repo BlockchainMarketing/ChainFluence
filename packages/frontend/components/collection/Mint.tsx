@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useContractFunction, useEthers } from '@usedapp/core'
 import { BigNumber, Contract } from 'ethers'
 import {
-  Box,
   Button,
   Container,
   Flex,
