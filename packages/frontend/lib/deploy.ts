@@ -7,10 +7,13 @@ import {
   VRF_COORDINATOR_V2_ADDRESS,
   VRF_GAS_LANE,
 } from '../conf/config'
-import CreateFormValues from '../types/CreateFormValues'
+import {
+  CreateCollectionFormValues,
+  CreateCampaignFormValues,
+} from '../types/CreateFormValues'
 
 export async function deployNFTCollection(
-  nftParams: CreateFormValues,
+  nftParams: CreateCollectionFormValues,
   signer: Signer,
   chainId: number
 ): Promise<Contract> {
@@ -29,6 +32,27 @@ export async function deployNFTCollection(
     VRF_COORDINATOR_V2_ADDRESS[chainId],
     nftParams.vrfSubscriptionId,
     VRF_GAS_LANE[chainId],
+    VRF_CALLBACK_GAS_LIMIT
+  )
+
+  return deployedContract
+}
+
+export async function deployCampaignCollection(
+  campaignParams: CreateCampaignFormValues,
+  signer: Signer
+): Promise<Contract> {
+  const campaignCollection = new ContractFactory(
+    // TODO update Contract ABI
+    NFTCollection.abi,
+    NFTCollection.bytecode,
+    signer
+  )
+  const deployedContract = await campaignCollection.deploy(
+    campaignParams.name,
+    ethers.utils.parseEther(campaignParams.budget),
+    campaignParams.validationThreshold,
+    campaignParams.partakersLimit,
     VRF_CALLBACK_GAS_LIMIT
   )
 

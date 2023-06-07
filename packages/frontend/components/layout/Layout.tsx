@@ -104,25 +104,33 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
                   Open Campaign
                 </Link>
               </NextLink>
-              <Menu>
-                <MenuButton as={Link} px="4">
-                  Old
-                </MenuButton>
-                <MenuList>
-                  <NextLink href="/_old/feeds" passHref>
-                    <MenuItem>Data Feeds</MenuItem>
-                  </NextLink>
-                  <NextLink href="/_old/vrf" passHref>
-                    <MenuItem>Randomness</MenuItem>
-                  </NextLink>
-                  <NextLink href="/_old/external-api" passHref>
-                    <MenuItem>External API</MenuItem>
-                  </NextLink>
-                  <NextLink href="/_old/automation" passHref>
-                    <MenuItem>Automation</MenuItem>
-                  </NextLink>
-                </MenuList>
-              </Menu>
+              {process.env.NODE_ENV === 'development' && (
+                <Menu>
+                  <MenuButton as={Link} px="4">
+                    Old
+                  </MenuButton>
+                  <MenuList>
+                    <NextLink
+                      href="/_old/collection/0xbBC67173c4Fa70af411FF5667d811980aaDDF6b6"
+                      passHref
+                    >
+                      <MenuItem>Collection</MenuItem>
+                    </NextLink>
+                    <NextLink href="/_old/feeds" passHref>
+                      <MenuItem>Data Feeds</MenuItem>
+                    </NextLink>
+                    <NextLink href="/_old/vrf" passHref>
+                      <MenuItem>Randomness</MenuItem>
+                    </NextLink>
+                    <NextLink href="/_old/external-api" passHref>
+                      <MenuItem>External API</MenuItem>
+                    </NextLink>
+                    <NextLink href="/_old/automation" passHref>
+                      <MenuItem>Automation</MenuItem>
+                    </NextLink>
+                  </MenuList>
+                </Menu>
+              )}
             </Flex>
             {account ? (
               <Flex

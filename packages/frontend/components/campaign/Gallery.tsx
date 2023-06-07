@@ -12,12 +12,10 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+// import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useAllTokens } from '../../hooks/collection/useAllTokens'
 import { useOwnedTokens } from '../../hooks/collection/useOwnedTokens'
-import { useBatches } from '../../hooks/collection/useBatches'
-import { TokenGrid } from './TokenGrid'
-import { BatchList } from './BatchList'
+import { InfluencerGrid } from './InfluencerGrid'
 
 /**
  * Prop Types
@@ -38,26 +36,20 @@ export const Gallery = ({ collection }: GalleryProps): JSX.Element => {
   const ownedTokenUris = useOwnedTokens(collection, account)
   const ownedTokenUrisSorted = [...ownedTokenUris].reverse()
 
-  const batches = useBatches(collection)
-
   return (
     <>
       <GalleryInfo />
       <Tabs>
         <TabList>
-          <GalleryTab>Latest</GalleryTab>
-          <GalleryTab>Batches</GalleryTab>
-          <GalleryTab>Owned</GalleryTab>
+          <GalleryTab>Registered influencers</GalleryTab>
+          <GalleryTab isDisabled>Winners</GalleryTab>
         </TabList>
         <TabPanels>
           <TabPanel>
-            <TokenGrid tokenUris={allTokenUrisSorted} />
+            <InfluencerGrid influencerAddresses={allTokenUrisSorted} />
           </TabPanel>
           <TabPanel>
-            <BatchList tokenUris={allTokenUris} batches={batches} />
-          </TabPanel>
-          <TabPanel>
-            <TokenGrid tokenUris={ownedTokenUrisSorted} />
+            <InfluencerGrid influencerAddresses={ownedTokenUrisSorted} />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -65,25 +57,31 @@ export const Gallery = ({ collection }: GalleryProps): JSX.Element => {
   )
 }
 
-const GalleryTab = ({ children }: { children: React.ReactNode }) => (
-  <Tab _selected={{ color: 'white', bg: 'teal' }}>{children}</Tab>
+const GalleryTab = ({
+  children,
+  isDisabled = false,
+}: {
+  children: React.ReactNode
+  isDisabled?: boolean
+}) => (
+  <Tab isDisabled={isDisabled} _selected={{ color: 'white', bg: 'teal' }}>
+    {children}
+  </Tab>
 )
 
 const GalleryInfo = () => (
   <Container pb="12" textAlign="center">
     <Heading as="h2" size="lg" pb="4">
-      Items
+      Registered Influencers
     </Heading>
     <Text pb="4">
-      In this demo app we generate an SVG image on-chain and display the random
-      number as text for demonstration purposes. In reality you may want to use
-      it to generate random traits and complex graphics.
+      Influencers can register until campaign launch. After the launch,
+      they&lsquo;ll have to each the threshold of $validationThreshold retweets,
+      you will be able to share the price of $validationThreshold.
     </Text>
-    <Link
-      href="https://github.com/smartcontractkit/chainlink-automation-templates/tree/main/batch-nft-reveal#metadata"
-      isExternal
-    >
-      Learn More <ExternalLinkIcon mx="2px" />
+    <Link href="/">
+      Learn More
+      {/* <ExternalLinkIcon mx="2px" /> */}
     </Link>
   </Container>
 )

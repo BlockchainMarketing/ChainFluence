@@ -1,15 +1,15 @@
 import React, { useCallback, useState } from 'react'
 import { useEthers } from '@usedapp/core'
-import { Text, Heading } from '@chakra-ui/react'
+import { Text, Heading, Flex, Box } from '@chakra-ui/react'
 import { JsonRpcProvider } from '@ethersproject/providers'
 import { Section } from '../components/layout'
 
 import { Error } from '../components/Error'
 import { TransactionReceipt } from '@ethersproject/abstract-provider'
-import CreateFormValues from '../types//CreateFormValues'
 import { SuccessDialog } from '../components/dialogs/SuccessDialog'
-import { CreateForm } from '../components/forms/CreateForm'
-import { deployNFTCollection } from '../lib/deploy'
+import { deployCampaignCollection } from '../lib/deploy'
+import { CreateCampaignForm } from '../components/forms/CreateCampaignForm'
+import { CreateCampaignFormValues } from '../types/CreateFormValues'
 
 interface DeployedContract {
   address: string
@@ -18,7 +18,7 @@ interface DeployedContract {
 }
 
 function CreatePage(): JSX.Element {
-  const { chainId, library } = useEthers()
+  const { library } = useEthers()
 
   const [deployedContract, setDeployedContract] = useState<
     DeployedContract | undefined
@@ -28,7 +28,7 @@ function CreatePage(): JSX.Element {
   const [error, setError] = useState('')
 
   const onSubmit = useCallback(
-    async (args: CreateFormValues) => {
+    async (args: CreateCampaignFormValues) => {
       setError('')
 
       if (!(library instanceof JsonRpcProvider)) {
@@ -37,10 +37,9 @@ function CreatePage(): JSX.Element {
 
       let tx: TransactionReceipt
       try {
-        const contract = await deployNFTCollection(
+        const contract = await deployCampaignCollection(
           args,
-          library?.getSigner(),
-          chainId
+          library?.getSigner()
         )
         setIsLoading(true)
         tx = await contract.deployTransaction.wait()
@@ -56,32 +55,34 @@ function CreatePage(): JSX.Element {
         name: args.name,
       })
     },
-    [library, chainId]
+    [library]
   )
 
   return (
-    <>
-      <Heading as="h1" mb="8">
-        Create Campaign
-      </Heading>
-      <Text fontSize="xl">
-        Setup a campaign with the best influence&lsquo;s.
-      </Text>
-      <Section>
-        {deployedContract && (
-          <SuccessDialog
-            contractAddress={deployedContract.address}
-            deployTxHash={deployedContract.txHash}
-            campaignName={deployedContract.name}
-          />
-        )}
-        {!deployedContract && (
-          <CreateForm onSubmit={onSubmit} isLoading={isLoading} />
-        )}
-        {/* @ts-expect-error */}
-        {error && <Error message={error} mt="2" />}
-      </Section>
-    </>
+    <Flex direction="column" align="center" justify="center" minHeight="100vh">
+      <Box width="full" maxWidth="container.md" px={8}>
+        <Heading as="h1" mb="8">
+          Create Campaign
+        </Heading>
+        <Text fontSize="xl">
+          Setup a campaign with the best influence&lsquo;s.
+        </Text>
+        <Section>
+          {deployedContract && (
+            <SuccessDialog
+              contractAddress={deployedContract.address}
+              deployTxHash={deployedContract.txHash}
+              campaignName={deployedContract.name}
+            />
+          )}
+          {!deployedContract && (
+            <CreateCampaignForm onSubmit={onSubmit} isLoading={isLoading} />
+          )}
+          {/* @ts-expect-error */}
+          {error && <Error message={error} mt="2" />}
+        </Section>
+      </Box>
+    </Flex>
   )
 }
 

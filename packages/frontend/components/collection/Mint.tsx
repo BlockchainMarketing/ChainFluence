@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useContractFunction, useEthers } from '@usedapp/core'
 import { BigNumber, Contract } from 'ethers'
 import {
-  Box,
   Button,
   Container,
+  Flex,
   Heading,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -14,7 +14,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Error } from '../Error'
-import { useCollectionCall } from '../../hooks/useCollectionCall'
+import { useCollectionCall } from '../../hooks/collection/useCollectionCall'
 
 /**
  * Prop Types
@@ -51,13 +51,7 @@ export const Mint = ({ collection }: MintProps): JSX.Element => {
         {name || ''}
         {symbol ? `(${symbol})` : '...'}
       </Heading>
-      <Box
-        // @ts-expect-error
-        d="flex"
-        marginTop={{
-          base: '5',
-        }}
-      >
+      <Flex mt={5}>
         <NumberInput
           defaultValue={1}
           min={1}
@@ -98,7 +92,7 @@ export const Mint = ({ collection }: MintProps): JSX.Element => {
         >
           Mint
         </Button>
-      </Box>
+      </Flex>
       <Text mt="4">
         {totalSupply ? totalSupply.toString() : 0}/
         {maxSupply ? maxSupply.toString() : 0} minted{' '}

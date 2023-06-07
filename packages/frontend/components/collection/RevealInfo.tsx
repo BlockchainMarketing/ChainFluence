@@ -2,7 +2,7 @@ import moment from 'moment'
 import { BigNumber, Contract } from 'ethers'
 import { Container, Box, HStack, Heading, Text } from '@chakra-ui/react'
 import { Loading } from '../Loading'
-import { useCollectionCall } from '../../hooks/useCollectionCall'
+import { useCollectionCall } from '../../hooks/collection/useCollectionCall'
 
 /**
  * Constants & Helpers
