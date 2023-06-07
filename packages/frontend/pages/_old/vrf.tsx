@@ -1,8 +1,8 @@
 import React from 'react'
 import { Heading, Text, Link } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Section } from '../components/layout'
-import { RandomNFT, RandomNumber } from '../components/vrf'
+import { Section } from '../../components/layout'
+import { RandomNFT, RandomNumber } from '../../components/vrf'
 
 function VRF(): JSX.Element {
   return (

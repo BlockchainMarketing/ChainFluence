@@ -34,7 +34,7 @@ export const OpenForm = (): JSX.Element => {
       address: '',
     },
     onSubmit: (values) => {
-      router.push(`/collection/${values.address}`)
+      router.push(`/campaign/${values.address}`)
     },
   })
 
@@ -46,7 +46,7 @@ export const OpenForm = (): JSX.Element => {
         >
           <FormLabel htmlFor="address">Address</FormLabel>
           <Tooltip
-            label="Deployed NFT collection contract from this app"
+            label="Deployed campaign contract from this app"
             placement="right-start"
             fontSize="xs"
             hasArrow
@@ -74,7 +74,7 @@ export const OpenForm = (): JSX.Element => {
             Object.values(formik.errors).toString() != ''
           }
         >
-          Go to Collection
+          Go to Campaign
         </Button>
       </FormikProvider>
     </form>

@@ -91,7 +91,7 @@ export const CreateForm = ({
         <FormControl isInvalid={formik.touched.name && !!formik.errors.name}>
           <FormLabel htmlFor="name">Name</FormLabel>
           <Tooltip
-            label=" A descriptive name for a collection of NFTs used by third party applications like marketplaces and wallets."
+            label=" A descriptive name for a campaign of NFTs used by third party applications like marketplaces and wallets."
             placement="right-start"
             fontSize="xs"
             hasArrow
@@ -196,7 +196,7 @@ export const CreateForm = ({
         />
         <Center>
           <Tooltip
-            label="Using Chainlink VRF in generative art NFT collections is de-facto the standard approach for getting provably random source in smart contracts. By batching the reveal process, instead of making VRF calls for each NFT we can save cost up to 100x (in a collection of 10,000 with batch size of 100)."
+            label="Using Chainlink VRF in generative art NFT campaigns is de-facto the standard approach for getting provably random source in smart contracts. By batching the reveal process, instead of making VRF calls for each NFT we can save cost up to 100x (in a campaign of 10,000 with batch size of 100)."
             placement="right-start"
             fontSize="xs"
             hasArrow

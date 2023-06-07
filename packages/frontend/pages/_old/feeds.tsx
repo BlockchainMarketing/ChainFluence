@@ -1,8 +1,8 @@
 import React from 'react'
 import { Code, Heading, HStack, Link, Text } from '@chakra-ui/react'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Section } from '../components/layout'
-import { SelectFeed, PriceFeed, ProofOfReserve } from '../components/feeds'
+import { Section } from '../../components/layout'
+import { SelectFeed, PriceFeed, ProofOfReserve } from '../../components/feeds'
 
 function Feeds(): JSX.Element {
   return (

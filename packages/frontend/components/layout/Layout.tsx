@@ -104,26 +104,25 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
                   Open Campaign
                 </Link>
               </NextLink>
-              {/* <NextLink href="/feeds" passHref>
-                <Link px="4" py="1">
-                  Data Feeds
-                </Link>
-              </NextLink>
-              <NextLink href="/vrf" passHref>
-                <Link px="4" py="1">
-                  Randomness
-                </Link>
-              </NextLink>
-              <NextLink href="/external-api" passHref>
-                <Link px="4" py="1">
-                  External API
-                </Link>
-              </NextLink>
-              <NextLink href="/automation" passHref>
-                <Link px="4" py="1">
-                  Automation
-                </Link>
-              </NextLink> */}
+              <Menu>
+                <MenuButton as={Link} px="4">
+                  Old
+                </MenuButton>
+                <MenuList>
+                  <NextLink href="/_old/feeds" passHref>
+                    <MenuItem>Data Feeds</MenuItem>
+                  </NextLink>
+                  <NextLink href="/_old/vrf" passHref>
+                    <MenuItem>Randomness</MenuItem>
+                  </NextLink>
+                  <NextLink href="/_old/external-api" passHref>
+                    <MenuItem>External API</MenuItem>
+                  </NextLink>
+                  <NextLink href="/_old/automation" passHref>
+                    <MenuItem>Automation</MenuItem>
+                  </NextLink>
+                </MenuList>
+              </Menu>
             </Flex>
             {account ? (
               <Flex
@@ -190,35 +189,38 @@ export const Layout = ({ children, customMeta }: LayoutProps): JSX.Element => {
         </Container>
       </main>
       <footer>
-      <Container as="footer" mt="8" maxWidth="container.xl">
-            <Flex justify="space-between" align="center">
-                <Link href="https://github.com/paradoux/blockchain-marketing-marketplace" isExternal>
-                    <Flex>
-                        <Image src="../images/github.svg" boxSize="20px" />
-                        <Text ml={2}>GitHub</Text>
-                    </Flex>
-                </Link>
-                <Flex>
-                    <Link href="https://chn.lk/3R7BPNw" isExternal>
-                        <Image
-                            src="https://chain.link/badge-automation-black"
-                            height="72px"
-                            width="150px"
-                            alt="automation secured with chainlink"
-                            mr={2}
-                        />
-                    </Link>
-                    <Link href="https://chn.lk/3C1ffBV" isExternal>
-                        <Image
-                            src="https://chain.link/badge-randomness-black"
-                            height="72px"
-                            width="150px"
-                            alt="randomness secured with chainlink"
-                            ml={2}
-                        />
-                    </Link>
-                </Flex>
+        <Container as="footer" mt="8" maxWidth="container.xl">
+          <Flex justify="space-between" align="center">
+            <Link
+              href="https://github.com/paradoux/blockchain-marketing-marketplace"
+              isExternal
+            >
+              <Flex>
+                <Image src="../images/github.svg" boxSize="20px" />
+                <Text ml={2}>GitHub</Text>
+              </Flex>
+            </Link>
+            <Flex>
+              <Link href="https://chn.lk/3R7BPNw" isExternal>
+                <Image
+                  src="https://chain.link/badge-automation-black"
+                  height="72px"
+                  width="150px"
+                  alt="automation secured with chainlink"
+                  mr={2}
+                />
+              </Link>
+              <Link href="https://chn.lk/3C1ffBV" isExternal>
+                <Image
+                  src="https://chain.link/badge-randomness-black"
+                  height="72px"
+                  width="150px"
+                  alt="randomness secured with chainlink"
+                  ml={2}
+                />
+              </Link>
             </Flex>
+          </Flex>
         </Container>
       </footer>
     </>

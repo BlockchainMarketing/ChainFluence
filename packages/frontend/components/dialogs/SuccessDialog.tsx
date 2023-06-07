@@ -24,7 +24,7 @@ import { getNetworkName } from '../../lib/utils'
 interface SuccessDialogProps {
   contractAddress: string
   deployTxHash: string
-  collectionName: string
+  campaignName: string
 }
 
 /**
@@ -33,7 +33,7 @@ interface SuccessDialogProps {
 export const SuccessDialog = ({
   contractAddress,
   deployTxHash,
-  collectionName,
+  campaignName,
 }: SuccessDialogProps): JSX.Element => {
   const [checkedSteps, setCheckedSteps] = React.useState([false, false])
   const allChecked = checkedSteps.every(Boolean)
@@ -42,7 +42,7 @@ export const SuccessDialog = ({
 
   const router = useRouter()
   const viewColleciton = () => {
-    router.push(`/collection/${contractAddress}`)
+    router.push(`/campaign/${contractAddress}`)
   }
 
   const { chainId } = useEthers()
@@ -51,7 +51,7 @@ export const SuccessDialog = ({
   return (
     <>
       <Heading as="h2" mb="4" size="md">
-        {collectionName} successfully deployed!
+        {campaignName} successfully deployed!
       </Heading>
       <HStack>
         <Text>Address:</Text>
