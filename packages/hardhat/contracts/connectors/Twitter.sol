@@ -12,17 +12,6 @@ import "../../vendor/openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "../../vendor/openzeppelin/contracts/utils/structs/EnumerableMap.sol";
 import "../../vendor/openzeppelin/contracts/utils/Counters.sol";
 
-/* 
-TODO:
-
-- function to validate campaign claim (Called by influencer with tweetUrl) If retweet > threshold -> transfer slice of budget (slice computed budget/number of influencers)
-
-ValidateCampaignClaim:
-- requestValidateCampaign -> chainlink (maybe replace by chainlink function?)
-- fulfillValidateCampaign -> chainlink
-
-*/
-
 contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
   using Chainlink for Chainlink.Request;
   using EnumerableMap for EnumerableMap.UintToAddressMap;
@@ -41,6 +30,7 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
 
   struct Campaign {
     uint256 campaignId;
+    string name;
     address company;
     uint256 budget;
     uint256 validationThreshold;
@@ -88,7 +78,13 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice Initialize the link token and target oracle
    * All testnets config : https://docs.chain.link/any-api/testnet-oracles/
    */
-  constructor(bytes32 _jobId, string memory _requestBaseURI, address _oracle, address _link, uint256 _treasuryFee) {
+  constructor(
+    bytes32 _jobId,
+    string memory _requestBaseURI,
+    address _oracle,
+    address _link,
+    uint256 _treasuryFee
+  ) {
     setChainlinkToken(_link);
     setChainlinkOracle(_oracle);
     jobId = _jobId;
@@ -109,11 +105,17 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @param validationThreshold - Minimum amount of retweet, likes etc for a partaker to win
    * @param partakersLimit - Maximum amount of winning partakers for this campaign
    */
-  function createCampaign(uint256 budget, uint256 validationThreshold, uint256 partakersLimit) external {
+  function createCampaign(
+    string calldata name,
+    uint256 budget,
+    uint256 validationThreshold,
+    uint256 partakersLimit
+  ) external {
     lastCampaignId++;
     uint256 newCampaignId = lastCampaignId;
     Campaign storage newCampaign = campaignById[newCampaignId];
     newCampaign.budget = budget;
+    newCampaign.name = name;
     newCampaign.validationThreshold = validationThreshold;
     newCampaign.partakersLimit = partakersLimit;
     newCampaign.company = msg.sender;
@@ -137,7 +139,11 @@ contract TwitterV1 is Pausable, Ownable, ReentrancyGuard, ChainlinkClient {
    * @notice Function that allows a user to validate his  to close a
    * @param campaignId - The id of the campaign
    */
-  function claimCampaignContribution(uint256 campaignId, string memory postId, uint256 claimedCounter) external {
+  function claimCampaignContribution(
+    uint256 campaignId,
+    string memory postId,
+    uint256 claimedCounter
+  ) external {
     bool isClaimValid = _validateContributionClaim(campaignId, postId, claimedCounter);
     require(isClaimValid == true, "This contribution does not satisfy the campaign's requirements");
     _addPartakerToCampaignContributors(campaignId, msg.sender);
