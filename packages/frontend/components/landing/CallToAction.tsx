@@ -1,4 +1,5 @@
 import { Flex, Heading, Text, Button } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 export default function CallToAction() {
   return (
@@ -14,10 +15,12 @@ export default function CallToAction() {
         Ready to Get Started?
       </Heading>
       <Text fontSize="xl" mt={4}>
-        Sign up now and start earning points!
+        Register now to campaign to win some ETH!
       </Text>
-      <Button colorScheme={'whiteAlpha'} color={'teal'} mt={8} size="lg">
-        Sign Up
+      <Button colorScheme={'whiteAlpha'} mt={8} size="lg">
+        <NextLink href="/open" passHref>
+          See Campaigns
+        </NextLink>
       </Button>
     </Flex>
   )

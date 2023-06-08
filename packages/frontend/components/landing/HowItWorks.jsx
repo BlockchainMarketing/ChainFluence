@@ -60,7 +60,10 @@ function HowItWorks() {
           </Box>
         </Flex>
         <Box flex="1">
-          <Image src="https://via.placeholder.com/500x500" alt="placeholder" />
+          <Image
+            src="/images/Landing/How_its_Works.png"
+            alt="Landing How Its Works Image"
+          />
         </Box>
       </Flex>
     </Box>

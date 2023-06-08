@@ -22,10 +22,7 @@ function Banner() {
             </Button>
           </Box>
           <Box flex="1">
-            <Image
-              src="https://via.placeholder.com/500x500"
-              alt="placeholder"
-            />
+            <Image src="/images/Landing/Hero.png" alt="Landing Hero Image" />
           </Box>
         </Flex>
       </Box>
