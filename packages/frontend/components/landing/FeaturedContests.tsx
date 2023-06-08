@@ -1,5 +1,5 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Box, Grid, Heading, Text, Link, Flex } from '@chakra-ui/react'
+import { Grid, Heading, Text, Link, Flex } from '@chakra-ui/react'
 import { Section } from '../layout'
 
 export default function FeaturedContests() {

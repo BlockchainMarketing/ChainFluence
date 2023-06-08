@@ -2,16 +2,12 @@ import { CheckCircleIcon } from '@chakra-ui/icons'
 import {
   Box,
   Heading,
-  Text,
   Flex,
   Image,
-  Container,
-  Grid,
   List,
   ListItem,
   ListIcon,
 } from '@chakra-ui/react'
-import { BsCheckCircle } from 'react-icons/bs'
 
 function HowItWorks() {
   return (

@@ -1,12 +1,13 @@
-import { Box, Flex, Heading, Text, Icon } from '@chakra-ui/react'
+import { Flex, Heading, Text, Icon } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 
 export default function Benefits() {
   return (
     <Flex direction={'column'} gap={'8px'} bg="gray.100" p={5}>
       <Flex justify={'center'}>
+        {/* @ts-expect-error */}
         <Heading size="xl" mb={8} align="center">
-          It's a Win Win
+          It&lsquo;s a Win Win
         </Heading>
       </Flex>
       <Flex
