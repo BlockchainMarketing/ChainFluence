@@ -2,11 +2,12 @@
 // import { Heading, Text, Link } from '@chakra-ui/react'
 // import { ArrowForwardIcon } from '@chakra-ui/icons'
 // import { Section } from '../components/layout'
-import Hero from '../components/landing/Hero'
+import Banner from '../components/landing/Banner'
+import HowItWorks from '../components/landing/HowItWorks'
 import Benefits from '../components/landing/Benefits'
 import FeaturedContests from '../components/landing/FeaturedContests'
 import CallToAction from '../components/landing/CallToAction'
-import HowItWorks from '../components/landing/HowItWorks'
+import { Flex } from '@chakra-ui/react'
 
 function HomeIndex(): JSX.Element {
   return (
@@ -72,11 +73,13 @@ function HomeIndex(): JSX.Element {
           </Link>
         </NextLink>
       </Section> */}
-      <Hero />
-      <Benefits />
-      <FeaturedContests />
-      <CallToAction />
-      <HowItWorks />
+      <Flex direction={'column'}>
+        <Banner />
+        <Benefits />
+        <HowItWorks />
+        <FeaturedContests />
+        <CallToAction />
+      </Flex>
     </>
   )
 }

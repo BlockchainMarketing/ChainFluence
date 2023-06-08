@@ -5,7 +5,7 @@ import { Section } from '../components/layout'
 
 function OpenPage(): JSX.Element {
   return (
-    <Flex direction="column" align="center" justify="center" minHeight="100vh">
+    <Flex direction="column" align="center" justify="center" minHeight="75vh">
       <Box width="full" maxWidth="container.md" px={8}>
         <Heading as="h1" mb="8">
           Open Campaign

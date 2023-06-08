@@ -1,10 +1,10 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import { Box, Grid, Heading, Text, Link } from '@chakra-ui/react'
+import { Grid, Heading, Text, Link, Flex } from '@chakra-ui/react'
 import { Section } from '../layout'
 
 export default function FeaturedContests() {
   return (
-    <Box p={5}>
+    <Flex bg="gray.100" p={5} direction={'column'} align={'center'}>
       <Heading as="h2" size="xl">
         Featured Contests
       </Heading>
@@ -56,6 +56,6 @@ export default function FeaturedContests() {
           </Link>
         </Section>
       </Grid>
-    </Box>
+    </Flex>
   )
 }
