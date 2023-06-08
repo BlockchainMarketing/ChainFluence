@@ -1,4 +1,4 @@
-import { ethers } from 'hardhat'
+import { ethers, run } from 'hardhat'
 import { DeployFunction } from 'hardhat-deploy/types'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
 
@@ -25,7 +25,7 @@ const func: DeployFunction = async function ({
   }
 
   if (!linkTokenAddress)
-    throw new Error('Link token address not found for chainId', chainId)
+    throw new Error(`Link token address not found for chainId ${chainId}`)
 
   const deployer = await ethers.getSigner(deployerAddress)
 
@@ -36,7 +36,7 @@ const func: DeployFunction = async function ({
   }
 
   const apiBaseUrl = 'https://giveaway.lfgames.workers.dev'
-  const treasuryFee = 300
+  const treasuryFee = 500 // 5%
   const oracleId = '0xCC79157eb46F5624204f47AB42b3906cAA40eaB7'
   const jobId = '7223acbd01654282865b678924126013'
 
@@ -55,6 +55,7 @@ const func: DeployFunction = async function ({
   const {
     address: twitterAddress,
     newlyDeployed: twitterNewlyDeployed,
+    // @ts-expect-error
     receipt: { gasUsed: twitterGasUsed },
   } = await deploy('TwitterV1', {
     ...options,
@@ -72,13 +73,13 @@ const func: DeployFunction = async function ({
   await delay(30 * 1000)
   try {
     log(`✅ Verifying contract Twitter`)
-    await hre.run('verify:verify', {
+    await run('verify:verify', {
       address: twitterAddress,
       constructorArguments: twitterArgs,
     })
     log(`🕧 Waiting post verification...`)
     await delay(10 * 1000)
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error during contract verification', error.message)
   }
 }
