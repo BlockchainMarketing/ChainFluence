@@ -10,6 +10,8 @@ import { SuccessDialog } from '../components/dialogs/SuccessDialog'
 import { deployCampaignCollection } from '../lib/deploy'
 import { CreateCampaignForm } from '../components/forms/CreateCampaignForm'
 import { CreateCampaignFormValues } from '../types/CreateFormValues'
+import { useContract } from '../hooks/useContract'
+import { useCampaignContract } from '../hooks/campaign/useCampaignContract'
 
 interface DeployedContract {
   address: string
@@ -24,6 +26,15 @@ function CreatePage(): JSX.Element {
     DeployedContract | undefined
   >()
 
+  const contract = useContract('ChainFluenceV1')
+  console.log('🚀 ~ file: create.tsx:29 ~ CreatePage ~ contract:', contract)
+
+  // const { contract, loading, error } = useCollectionContract(address)
+  // const contract = useCampaignContract()
+  // console.log('🚀 ~ file: create.tsx:32 ~ CreatePage ~ contract:', contract)
+
+  // const { send, state } = useContractFunction(contract, 'createCampaign')
+
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -37,12 +48,14 @@ function CreatePage(): JSX.Element {
 
       let tx: TransactionReceipt
       try {
-        const contract = await deployCampaignCollection(
-          args,
-          library?.getSigner()
-        )
+        // const call = await send(...args)
+        // const contract = await deployCampaignCollection(
+        //   args,
+        //   library?.getSigner()
+        // )
         setIsLoading(true)
-        tx = await contract.deployTransaction.wait()
+        // tx = await contract.deployTransaction.wait()
+        // tx = await call.wait()
       } catch (ex) {
         setError(ex.reason || ex.message || 'Unsuccessful deployment')
         return

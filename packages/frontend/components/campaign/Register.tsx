@@ -82,9 +82,7 @@ export const Register = ({ collection }: RegisterProps): JSX.Element => {
           px="8"
           // TODO register user
           // onClick={() => {
-          //   send(twitterHandle, {
-          //     value: mintCost.mul(mintAmount),
-          //   })
+          //   send(twitterHandle)
           // }}
         >
           Register

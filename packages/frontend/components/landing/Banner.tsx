@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 function Banner() {
   return (
@@ -18,7 +19,9 @@ function Banner() {
               Set your goal, launch your campaign, reward the one who win.
             </Text>
             <Button size="lg" colorScheme="teal">
-              Get Started
+              <NextLink href="/create" passHref>
+                Get Started
+              </NextLink>
             </Button>
           </Box>
           <Box flex="1">

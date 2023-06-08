@@ -11,7 +11,7 @@ import {
   Divider,
 } from '@chakra-ui/react'
 import { CreateCampaignFormValues } from '../../types/CreateFormValues'
-import { isEmpty, isPositiveNumber } from '../../lib/helper'
+import { isEmpty, isFractionalNumber, isPositiveNumber } from '../../lib/helper'
 
 /**
  * Prop Types
@@ -86,7 +86,7 @@ export const CreateCampaignForm = ({
                 as={Input}
                 bg="white"
                 name="budget"
-                validate={isPositiveNumber}
+                validate={isFractionalNumber}
                 placeholder="10"
               />
             </div>

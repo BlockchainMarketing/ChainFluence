@@ -1,6 +1,7 @@
 import { Contract, ContractFactory, ethers, Signer } from 'ethers'
 
 import NFTCollection from '../artifacts/contracts/NFTCollection.sol/NFTCollection.json'
+import ChainFluenceV1 from '../artifacts/contracts/ChainFluenceV1.sol/ChainFluenceV1.json'
 
 import {
   VRF_CALLBACK_GAS_LIMIT,
@@ -11,6 +12,30 @@ import {
   CreateCollectionFormValues,
   CreateCampaignFormValues,
 } from '../types/CreateFormValues'
+
+export async function deployCampaignCollection(
+  campaignParams: CreateCampaignFormValues,
+  signer: Signer
+): Promise<Contract> {
+  const campaignCollection = new ContractFactory(
+    ChainFluenceV1.abi,
+    ChainFluenceV1.bytecode,
+    signer
+  )
+
+  const deployedContract = await campaignCollection.deploy(
+    campaignParams.name,
+    ethers.utils.parseEther(campaignParams.budget),
+    campaignParams.validationThreshold,
+    campaignParams.partakersLimit,
+    VRF_CALLBACK_GAS_LIMIT
+    // , {
+    //     value: mintCost.mul(mintAmount),
+    //   }
+  )
+
+  return deployedContract
+}
 
 export async function deployNFTCollection(
   nftParams: CreateCollectionFormValues,
@@ -32,27 +57,6 @@ export async function deployNFTCollection(
     VRF_COORDINATOR_V2_ADDRESS[chainId],
     nftParams.vrfSubscriptionId,
     VRF_GAS_LANE[chainId],
-    VRF_CALLBACK_GAS_LIMIT
-  )
-
-  return deployedContract
-}
-
-export async function deployCampaignCollection(
-  campaignParams: CreateCampaignFormValues,
-  signer: Signer
-): Promise<Contract> {
-  const campaignCollection = new ContractFactory(
-    // TODO update Contract ABI
-    NFTCollection.abi,
-    NFTCollection.bytecode,
-    signer
-  )
-  const deployedContract = await campaignCollection.deploy(
-    campaignParams.name,
-    ethers.utils.parseEther(campaignParams.budget),
-    campaignParams.validationThreshold,
-    campaignParams.partakersLimit,
     VRF_CALLBACK_GAS_LIMIT
   )
 
