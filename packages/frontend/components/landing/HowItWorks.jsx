@@ -61,7 +61,7 @@ function HowItWorks() {
         </Flex>
         <Box flex="1">
           <Image
-            src="/images/landing/How_its_Works.png"
+            src="/images/landing/How_Its_Works.png"
             alt="Landing How Its Works Image"
           />
         </Box>
