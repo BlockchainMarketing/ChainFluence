@@ -22,7 +22,7 @@ function Banner() {
             </Button>
           </Box>
           <Box flex="1">
-            <Image src="/images/Landing/Hero.png" alt="Landing Hero Image" />
+            <Image src="/images/landing/Hero.png" alt="Landing Hero Image" />
           </Box>
         </Flex>
       </Box>
